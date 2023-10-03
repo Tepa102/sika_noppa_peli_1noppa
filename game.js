@@ -50,6 +50,10 @@ function updatePlayerList() {
 }
 
 function rollDie() {
+    // Tarkista, onko peli jo päättynyt
+    if (document.querySelector("button").disabled) {
+        return;
+    }
     let resultElement = document.getElementById("result");
     let roll = Math.floor(Math.random() * 6) + 1;
     noppaImage.src = `img/noppa${roll}.gif`;
@@ -77,6 +81,11 @@ function endTurn() {
         updatePlayerList(); // Päivitä pelaajien pisteet
         updateCurrentPlayer(); // Päivitä vuorossa olevan pelaaja
     }
+    // Poista "Heitä noppaa" -nappula käytöstä pelin päättyessä
+    if (document.querySelector("button").disabled) {
+        document.querySelector("button").disabled = true;
+    }
+    
 }
 function startNewGame() {
     playerCount = 0;
